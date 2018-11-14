@@ -157,13 +157,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ImagenesController.cs" />
+    <Compile Include="Controllers\ListadoController.cs" />
     <Compile Include="DATOS\Categoria.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductosController.cs" />
-    <Compile Include="DATOS\CategoriasConsultas.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="DATOS\Consultas.cs" />
     <Compile Include="DATOS\DataSEG.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,8 +190,7 @@
     <Compile Include="DATOS\Imagene.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoriaDTO.cs" />
-    <Compile Include="Models\ProductoDTO.cs" />
+    <Compile Include="Models\CategoriaViewModel.cs" />
     <Compile Include="Models\ProductoViewModel.cs" />
     <Compile Include="DATOS\Producto.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
@@ -318,8 +319,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -330,12 +329,17 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Productos\Listado.cshtml" />
-    <Content Include="Views\Productos\Listado - Copy.cshtml" />
-    <Content Include="Views\Productos\Categoria.cshtml" />
+    <Content Include="Views\Consultas\Categorias.cshtml" />
+    <Content Include="Views\Listado\Index.cshtml" />
+    <Content Include="Views\Consultas\Productos.cshtml" />
+    <Content Include="Views\Consultas\Categoria.cshtml" />
+    <Content Include="Views\Consultas\Producto.cshtml" />
+    <Content Include="Views\Consultas\Search.cshtml" />
+    <Content Include="Views\Listado\IndexCopy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Imagenes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

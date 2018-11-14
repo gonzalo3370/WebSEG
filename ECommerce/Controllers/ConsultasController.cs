@@ -12,27 +12,92 @@ namespace ECommerce.Controllers
 {
     public class ConsultasController : Controller
     {
-        /*public IEnumerable<CategoriaDTO> GetCategorias()
+        public ActionResult TodasLasCategorias()
         {
-            var categoriasConsultas = new CategoriasConsultas();
-            var res = from c in categoriasConsultas.ObtenerCategorias()
-                      select new CategoriaDTO
+            var Consultas = new Consultas();
+            var res = from c in Consultas.GetCategorias()
+                      select new CategoriaViewModel
                       {
                           IdCategoria = c.IdCategoria,
                           Nombre = c.Nombre
                       };
-            return res?.ToList();
-        }*/
-
-        public ActionResult Categoria()
+            return View(viewName:"Categorias", model: res.LastOrDefault());
+        }
+        public ActionResult TodosLosProductos()
         {
-            var categoria = new List<Models.ProductoDTO>();
-            categoria.Add(new Models.ProductoDTO
+            var Consultas = new Consultas();
+            var res = from p in Consultas.GetProductos()
+                      select new ProductoViewModel
                       {
-                          IdCategoria = 2,
-                          Nombre = "Nombre"
-                      });
-            return View(model: categoria);
+                          IdProducto = p.IdProducto,
+                          IdCategoria = p.IdCategoria,
+                          Nombre = p.Nombre,
+                          Descripcion = p.Descripcion
+                      };
+            return View(viewName: "Productos", model: res.LastOrDefault());
+        }
+        public ActionResult Categoria (int Id)
+        {
+            var Consultas = new Consultas();
+            var res = from c in Consultas.GetCategoria(Id)
+                      select new CategoriaViewModel
+                      {                                                
+                          IdCategoria = c.IdCategoria,
+                          Nombre = c.Nombre
+                      };
+            return View(viewName: "Categoria", model: res.FirstOrDefault());
+        }
+        public ActionResult Producto(int Id)
+        {
+            var Consultas = new Consultas();
+            var res = from p in Consultas.GetProducto(Id)
+                      select new ProductoViewModel
+                      {
+                          IdProducto = p.IdProducto,
+                          IdCategoria = p.IdCategoria,
+                          Nombre = p.Nombre,
+                          Descripcion = p.Descripcion
+                      };
+            return View(viewName: "Producto", model: res.FirstOrDefault());
+        }
+        public ActionResult Search (string Texto)
+        {
+            var Consultas = new Consultas();
+            var res = from p in Consultas.SearchProducto(Texto)
+                      select new ProductoViewModel
+                      {
+                          IdProducto = p.IdProducto,
+                          IdCategoria = p.IdCategoria,
+                          Nombre = p.Nombre,
+                          Descripcion = p.Descripcion
+                      };
+            return View(viewName: "Search", model: res.FirstOrDefault());
+
+        }
+
+        public ActionResult Productos (int Id)
+        {
+            var Consultas = new Consultas();
+            var res = from p in Consultas.ProductosPorCategoria(Id)
+                      select new ProductoViewModel
+                      {
+                          IdProducto = p.IdProducto,
+                          IdCategoria = p.IdCategoria,
+                          Nombre = p.Nombre,
+                          Descripcion = p.Descripcion
+                      };
+            return View(viewName: "Producto", model: res.FirstOrDefault());
+        }
+
+        public void Imagen(int id)
+        {
+            var bytes = new Consultas().Imagen(id);
+            Response.ContentType = "image/png";
+            Response.Clear();
+            Response.BufferOutput = true;
+            Response.BinaryWrite(bytes);
+            Response.Flush();
         }
     }
 }
+
