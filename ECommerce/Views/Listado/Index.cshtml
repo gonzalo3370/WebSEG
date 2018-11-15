@@ -1,133 +1,40 @@
 ﻿<!DOCTYPE html>
 
-@model ECommerce.Models.ProductoViewModel
+@model IList<ECommerce.Models.ProductoViewModel>
 
 @section styles{
     <!-- Custom styles for this template -->
     <link href="~/Content/shop-homepage.css" rel="stylesheet">
 }
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Producto</title>
 </head>
 <body>
-    <div>
-        <h2>Ésta es la vista Listado/Index</h2> <br>
-        <h4>probando la union de ambos index 2</h4> <br>
-        <label>El Id de producto: @Model.IdProducto </label> <br>
-        <label>El Id de su categoria es: @Model.IdCategoria </label> <br>
-        <label>Su Id de imagen es: @Model.IdImagen </label> <br>
-        <label>El nombre de éste producto es: @Model.Nombre </label> <br>
-        <label>Su descripción es: @Model.Descripcion </label>
-    </div>
-    <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             <div class="col-lg-3">
-                <h1 class="my-4">Productos de la categoria: @Model.IdCategoria </h1>
+                <h1 class="my-4">Categoria: @Model[0].IdCategoria </h1>
             </div>
-            <!-- /.col-lg-3 -->
-
-
-            <div class="col-lg-9">
-
-
-                <div class="row">                    
-                    <div class="col-lg-4 col-md-6 mb-4">
+            <div class="row">
+                @for (var idx = 0; idx < Model.Count; idx++)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <div class="card h-100">
                             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                             <div class="card-body">
                                 <div class="card-title">
-                                    @Html.ActionLink(@Model.Nombre, "Productos", "Listado", new { @Id = 1 }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink(@Model[idx].Nombre, "Producto", "Producto", new { @Id = idx+1 }, new { @class = "btn btn-primary" })
                                 </div>
+                                <p class="card-text">@Model[idx].Descripcion</p>
                                 <h5>$24.99</h5>
-                                <p class="card-text">@Model.Descripcion</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Three</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Descripcion del otro producto</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Four</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Five</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Six</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- /.row -->
-
+                }
             </div>
-            <!-- /.col-lg-9 -->
-
         </div>
-        <!-- /.row -->
-
     </div>
-    <!-- /.container -->
 </body>
 </html>

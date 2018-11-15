@@ -12,10 +12,10 @@ namespace ECommerce.Controllers
 {
     public class ProductoController : Controller
     {
-        public ActionResult Productos()
+        public ActionResult Producto( int Id)
         {
             var Consultas = new Consultas();
-            var res = from p in Consultas.GetProductos()
+            var res = from p in Consultas.GetProducto(Id)
                       select new ProductoViewModel
                       {
                           IdProducto = p.IdCategoria,
@@ -23,15 +23,7 @@ namespace ECommerce.Controllers
                           Descripcion = p.Descripcion,
                           
                       };
-            return View(viewName: "../Productos/index", model: res.LastOrDefault());
+            return View(viewName: "index", model: res.FirstOrDefault());
         }
-        /// <summary>
-        /// TODO: Hacer el action y crear la vista
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /*public ActionResult Index (int id)
-        {
-        }*/
     }
 }

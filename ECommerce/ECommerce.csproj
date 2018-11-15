@@ -336,10 +336,10 @@
     <Content Include="Views\Consultas\Producto.cshtml" />
     <Content Include="Views\Consultas\Search.cshtml" />
     <Content Include="Views\Listado\IndexCopy.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Imagenes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

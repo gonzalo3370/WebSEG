@@ -18,15 +18,15 @@ namespace ECommerce.Controllers
         public ActionResult Productos(int Id)
         {
             var Consultas = new Consultas();
-            var res = from p in Consultas.ProductosPorCategoria(Id)
-                      select new ProductoViewModel
-                      {
-                          IdProducto = p.IdProducto,
-                          IdCategoria = p.IdCategoria,
-                          Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
-                      };
-            return View(viewName: "Index", model: res.FirstOrDefault());
+            var res = (from p in Consultas.ProductosPorCategoria(Id)
+                       select new ProductoViewModel
+                       {
+                           IdProducto = p.IdProducto,
+                           IdCategoria = p.IdCategoria,
+                           Nombre = p.Nombre,
+                           Descripcion = p.Descripcion
+                       }).ToList();
+            return View(viewName: "Index", model: res);
         }
 
         public ActionResult Search(string Texto)
