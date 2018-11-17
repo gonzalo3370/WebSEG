@@ -205,6 +205,7 @@
     <Compile Include="DATOS\sysdiagram.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
+    <Compile Include="SQL\datos.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
