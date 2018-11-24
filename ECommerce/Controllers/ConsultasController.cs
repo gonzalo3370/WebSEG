@@ -32,7 +32,7 @@ namespace ECommerce.Controllers
                           IdProducto = p.IdProducto,
                           IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
+                          DescripcionBreve = p.DescripcionBreve
                       };
             return View(viewName: "Productos", model: res.LastOrDefault());
         }
@@ -56,7 +56,7 @@ namespace ECommerce.Controllers
                           IdProducto = p.IdProducto,
                           IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
+                          DescripcionBreve = p.DescripcionBreve
                       };
             return View(viewName: "Producto", model: res.FirstOrDefault());
         }
@@ -69,7 +69,7 @@ namespace ECommerce.Controllers
                           IdProducto = p.IdProducto,
                           IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
+                          DescripcionBreve = p.DescripcionBreve
                       };
             return View(viewName: "Search", model: res.FirstOrDefault());
 
@@ -84,7 +84,7 @@ namespace ECommerce.Controllers
                           IdProducto = p.IdProducto,
                           IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
+                          DescripcionBreve = p.DescripcionBreve
                       };
             return View(viewName: "Producto", model: res.FirstOrDefault());
         }

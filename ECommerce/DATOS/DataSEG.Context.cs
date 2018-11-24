@@ -29,9 +29,10 @@ namespace ECommerce.DATOS
     
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<DATO> DATOS { get; set; }
-        public virtual DbSet<Imagene> Imagenes { get; set; }
-        public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<DetalleProducto> DetalleProductoes { get; set; }
+        public virtual DbSet<Producto> Productos { get; set; }
+        public virtual DbSet<Imagene> Imagenes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

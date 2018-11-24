@@ -7,12 +7,18 @@
       <Diagram DiagramId="ede410fec3174bf686dc315837f164d0" Name="Diagram1">
         <EntityTypeShape EntityType="SEGModel.Categoria" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SEGModel.DATO" Width="1.5" PointX="1.5" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEGModel.Imagene" Width="1.5" PointX="7.625" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEGModel.Producto" Width="1.5" PointX="3.125" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SEGModel.sysdiagram" Width="1.5" PointX="4.375" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="SEGModel.FK_Productos_Categorias" ManuallyRouted="false" />
-        <AssociationConnector Association="SEGModel.FK_Imagenes_Productos" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="SEGModel.DetalleProducto" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="SEGModel.Producto" Width="1.5" PointX="3.375" PointY="0.875" />
+        <AssociationConnector Association="SEGModel.FK_Productos_Categorias" />
+        <AssociationConnector Association="SEGModel.FK_DetalleProducto_Productos" />
+        <EntityTypeShape EntityType="SEGModel.Imagene" Width="1.5" PointX="7" PointY="4.375" />
+        <AssociationConnector Association="SEGModel.FK_Imagenes_Productos" ManuallyRouted="true" >
+          <ConnectorPoint PointX="3.84375" PointY="3.6244921875" />
+          <ConnectorPoint PointX="3.84375" PointY="6.1990364583333317" />
+          <ConnectorPoint PointX="7" PointY="6.1990364583333317" />
+        </AssociationConnector>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

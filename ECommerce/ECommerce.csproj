@@ -184,6 +184,9 @@
     <Compile Include="DATOS\DATO.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
+    <Compile Include="DATOS\DetalleProducto.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

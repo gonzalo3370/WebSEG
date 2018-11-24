@@ -50,7 +50,7 @@ namespace ECommerce.DATOS
             using (var context = new SEGEntities())
             {
                 return (
-                    from p in context.Productos
+                    from p in context.Productos.Include("Imagenes")
                     where p.IdCategoria == Id
                     select p
                     ).ToList();

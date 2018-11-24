@@ -12,9 +12,11 @@ namespace ECommerce.Controllers
     public class ImagenesController : Controller
     {
         // GET: Imagenes
-        public void Imagen(int idImagen)
+        public void Imagen(int id)
         {
-            var bytes = new Consultas().Imagen(idImagen);
+            byte[] bytes = id == 0
+                   ? System.IO.File.ReadAllBytes(Server.MapPath("/content/images/Xbox360.jpg"))
+                   : new Consultas().Imagen(id);
             Response.ContentType = "image/png";
             Response.Clear();
             Response.BufferOutput = true;

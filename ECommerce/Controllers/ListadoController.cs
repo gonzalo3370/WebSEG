@@ -24,7 +24,12 @@ namespace ECommerce.Controllers
                            IdProducto = p.IdProducto,
                            IdCategoria = p.IdCategoria,
                            Nombre = p.Nombre,
-                           Descripcion = p.Descripcion
+                           DescripcionBreve = p.DescripcionBreve,
+                           IdImagen = (
+                                from i in p.Imagenes
+                                orderby i.Orden
+                                select i
+                            ).FirstOrDefault()?.IdImagen ?? 0,
                        }).ToList();
             return View(viewName: "Index", model: res);
         }
@@ -38,7 +43,7 @@ namespace ECommerce.Controllers
                           IdProducto = p.IdProducto,
                           IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion
+                          DescripcionBreve = p.DescripcionBreve
                       };
             return View(viewName: "../Consultas/Search", model: res.FirstOrDefault());
 

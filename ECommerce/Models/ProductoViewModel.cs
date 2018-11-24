@@ -12,7 +12,7 @@ namespace ECommerce.Models
         public int IdCategoria { get; set; }        
         public int IdImagen { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string DescripcionBreve { get; set; }
         public string Categoria { get; set; }
         public int Precio { get; set; }    
     }

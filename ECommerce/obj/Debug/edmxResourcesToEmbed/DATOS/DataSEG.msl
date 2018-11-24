@@ -22,25 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Imagenes">
-      <EntityTypeMapping TypeName="SEGModel.Imagene">
-        <MappingFragment StoreEntitySet="Imagenes">
-          <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
-          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Productos">
-      <EntityTypeMapping TypeName="SEGModel.Producto">
-        <MappingFragment StoreEntitySet="Productos">
-          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="SEGModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -76,5 +57,41 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SEGModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SEGModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="DetalleProductoes">
+      <EntityTypeMapping TypeName="SEGModel.DetalleProducto">
+        <MappingFragment StoreEntitySet="DetalleProducto">
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Central" ColumnName="Central" />
+          <ScalarProperty Name="Reduccion" ColumnName="Reduccion" />
+          <ScalarProperty Name="Motor" ColumnName="Motor" />
+          <ScalarProperty Name="TiempoApertura" ColumnName="TiempoApertura" />
+          <ScalarProperty Name="PesoMaximo" ColumnName="PesoMaximo" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="IdDetalleProducto" ColumnName="IdDetalleProducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="SEGModel.Producto">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="DescripcionBreve" ColumnName="DescripcionBreve" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Imagenes">
+      <EntityTypeMapping TypeName="SEGModel.Imagene">
+        <MappingFragment StoreEntitySet="Imagenes">
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

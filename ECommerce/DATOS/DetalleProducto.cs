@@ -12,12 +12,16 @@ namespace ECommerce.DATOS
     using System;
     using System.Collections.Generic;
     
-    public partial class Imagene
+    public partial class DetalleProducto
     {
-        public int IdImagen { get; set; }
-        public byte[] Imagen { get; set; }
+        public int IdDetalleProducto { get; set; }
         public int IdProducto { get; set; }
-        public Nullable<int> Orden { get; set; }
+        public string PesoMaximo { get; set; }
+        public string TiempoApertura { get; set; }
+        public string Motor { get; set; }
+        public string Reduccion { get; set; }
+        public string Central { get; set; }
+        public string Complemento { get; set; }
     
         public virtual Producto Producto { get; set; }
     }

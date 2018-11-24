@@ -20,7 +20,7 @@ namespace ECommerce.Controllers
                       {
                           IdProducto = p.IdCategoria,
                           Nombre = p.Nombre,
-                          Descripcion = p.Descripcion,
+                          DescripcionBreve = p.DescripcionBreve,
                           
                       };
             return View(viewName: "index", model: res.FirstOrDefault());

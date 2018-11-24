@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="IdCategoria" />
@@ -24,6 +24,19 @@
           <Property Name="Facebook" Type="nvarchar" MaxLength="50" />
           <Property Name="Instagram" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="DetalleProducto">
+          <Key>
+            <PropertyRef Name="IdDetalleProducto" />
+          </Key>
+          <Property Name="IdDetalleProducto" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="PesoMaximo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TiempoApertura" Type="nvarchar" MaxLength="50" />
+          <Property Name="Motor" Type="nvarchar" MaxLength="500" />
+          <Property Name="Reduccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Central" Type="nvarchar" MaxLength="50" />
+          <Property Name="Complemento" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Imagenes">
           <Key>
             <PropertyRef Name="IdImagen" />
@@ -31,6 +44,7 @@
           <Property Name="IdImagen" Type="int" Nullable="false" />
           <Property Name="Imagen" Type="image" Nullable="false" />
           <Property Name="IdProducto" Type="int" Nullable="false" />
+          <Property Name="Orden" Type="int" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -38,8 +52,10 @@
           </Key>
           <Property Name="IdProducto" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescripcionBreve" Type="nvarchar" MaxLength="550" Nullable="false" />
           <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -51,6 +67,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_DetalleProducto_Productos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleProducto" Type="Self.DetalleProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DetalleProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Imagenes_Productos">
           <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
           <End Role="Imagenes" Type="Self.Imagenes" Multiplicity="*" />
@@ -109,9 +137,14 @@
         <EntityContainer Name="SEGModelStoreContainer">
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATOS" EntityType="Self.DATOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleProducto" EntityType="Self.DetalleProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Imagenes" EntityType="Self.Imagenes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetalleProducto_Productos" Association="Self.FK_DetalleProducto_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleProducto" EntitySet="DetalleProducto" />
+          </AssociationSet>
           <AssociationSet Name="FK_Imagenes_Productos" Association="Self.FK_Imagenes_Productos">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="Imagenes" EntitySet="Imagenes" />
@@ -121,8 +154,7 @@
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -132,7 +164,7 @@
           </Key>
           <Property Name="IdCategoria" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Categorias" FromRole="Categorias" ToRole="Productos" />
+          <NavigationProperty Name="Productos" Relationship="SEGModel.FK_Productos_Categorias" FromRole="Categoria" ToRole="Producto" />
         </EntityType>
         <EntityType Name="DATO">
           <Key>
@@ -146,26 +178,6 @@
           <Property Name="Facebook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Instagram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Imagene">
-          <Key>
-            <PropertyRef Name="IdImagen" />
-          </Key>
-          <Property Name="IdImagen" Type="Int32" Nullable="false" />
-          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="IdProducto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK_Imagenes_Productos" FromRole="Imagenes" ToRole="Productos" />
-        </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="IdProducto" />
-          </Key>
-          <Property Name="IdProducto" Type="Int32" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Categoria" Relationship="Self.FK_Productos_Categorias" FromRole="Productos" ToRole="Categorias" />
-          <NavigationProperty Name="Imagenes" Relationship="Self.FK_Imagenes_Productos" FromRole="Productos" ToRole="Imagenes" />
-        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -176,44 +188,10 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Productos_Categorias">
-          <End Role="Categorias" Type="Self.Categoria" Multiplicity="1" />
-          <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categorias">
-              <PropertyRef Name="IdCategoria" />
-            </Principal>
-            <Dependent Role="Productos">
-              <PropertyRef Name="IdCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Imagenes_Productos">
-          <End Role="Productos" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Imagenes" Type="Self.Imagene" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="Imagenes">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SEGEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categorias" EntityType="Self.Categoria" />
           <EntitySet Name="DATOS" EntityType="Self.DATO" />
-          <EntitySet Name="Imagenes" EntityType="Self.Imagene" />
-          <EntitySet Name="Productos" EntityType="Self.Producto" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
-            <End Role="Categorias" EntitySet="Categorias" />
-            <End Role="Productos" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Imagenes_Productos" Association="Self.FK_Imagenes_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="Imagenes" EntitySet="Imagenes" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -244,6 +222,21 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="DetalleProductoes" EntityType="SEGModel.DetalleProducto" />
+          <EntitySet Name="Productos" EntityType="SEGModel.Producto" />
+          <AssociationSet Name="FK_Productos_Categorias" Association="SEGModel.FK_Productos_Categorias">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleProducto_Productos" Association="SEGModel.FK_DetalleProducto_Productos">
+            <End Role="Producto" EntitySet="Productos" />
+            <End Role="DetalleProducto" EntitySet="DetalleProductoes" />
+          </AssociationSet>
+          <EntitySet Name="Imagenes" EntityType="SEGModel.Imagene" />
+          <AssociationSet Name="FK_Imagenes_Productos" Association="SEGModel.FK_Imagenes_Productos">
+            <End Role="Producto" EntitySet="Productos" />
+            <End Role="Imagene" EntitySet="Imagenes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -256,6 +249,80 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="DetalleProducto">
+          <Key>
+            <PropertyRef Name="IdDetalleProducto" />
+          </Key>
+          <Property Name="IdDetalleProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="PesoMaximo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TiempoApertura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Motor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Reduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Central" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Complemento" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Producto" Relationship="SEGModel.FK_DetalleProducto_Productos" FromRole="DetalleProducto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionBreve" Type="String" Nullable="false" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categoria" Relationship="SEGModel.FK_Productos_Categorias" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="DetalleProductoes" Relationship="SEGModel.FK_DetalleProducto_Productos" FromRole="Producto" ToRole="DetalleProducto" />
+          <NavigationProperty Name="Imagenes" Relationship="SEGModel.FK_Imagenes_Productos" FromRole="Producto" ToRole="Imagene" />
+        </EntityType>
+        <Association Name="FK_Productos_Categorias">
+          <End Type="SEGModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="SEGModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleProducto_Productos">
+          <End Type="SEGModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="SEGModel.DetalleProducto" Role="DetalleProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DetalleProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Imagene">
+          <Key>
+            <PropertyRef Name="IdImagen" />
+          </Key>
+          <Property Name="IdImagen" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="Orden" Type="Int32" />
+          <NavigationProperty Name="Producto" Relationship="SEGModel.FK_Imagenes_Productos" FromRole="Imagene" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_Imagenes_Productos">
+          <End Type="SEGModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="SEGModel.Imagene" Role="Imagene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="Imagene">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -280,25 +347,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />
                 <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Imagenes">
-            <EntityTypeMapping TypeName="SEGModel.Imagene">
-              <MappingFragment StoreEntitySet="Imagenes">
-                <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="SEGModel.Producto">
-              <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -337,6 +385,42 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SEGModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SEGModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="DetalleProductoes">
+            <EntityTypeMapping TypeName="SEGModel.DetalleProducto">
+              <MappingFragment StoreEntitySet="DetalleProducto">
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Central" ColumnName="Central" />
+                <ScalarProperty Name="Reduccion" ColumnName="Reduccion" />
+                <ScalarProperty Name="Motor" ColumnName="Motor" />
+                <ScalarProperty Name="TiempoApertura" ColumnName="TiempoApertura" />
+                <ScalarProperty Name="PesoMaximo" ColumnName="PesoMaximo" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdDetalleProducto" ColumnName="IdDetalleProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="SEGModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="DescripcionBreve" ColumnName="DescripcionBreve" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagenes">
+            <EntityTypeMapping TypeName="SEGModel.Imagene">
+              <MappingFragment StoreEntitySet="Imagenes">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
