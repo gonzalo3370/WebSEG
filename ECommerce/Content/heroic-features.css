@@ -6,6 +6,12 @@
 
 body {
     padding-top: 54px;
+    background-repeat: no-repeat;
+    /*background-image: url(https://png.pngtree.com/element_origin_min_pic/16/06/08/21575818e5a300f.jpg);*/
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: #EBEBEB;
 }
 
 @media (min-width: 992px) {
@@ -18,3 +24,64 @@ body {
     height: 100%;
 }
 
+div .Titulo  {
+    color:green;
+}
+
+#carouselExampleIndicators {
+    width: 900px;
+    margin: auto;
+    border: 1px solid #000000;
+    border-radius: 1%
+}
+
+.Fotos{
+    width: 900px;
+    height:375px;
+}
+
+.Categorias {
+    border: 2px blue solid;
+    margin: 0 auto;
+
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+}
+
+.Accesorios {
+    width: 300px;
+    border: 2px solid #ff0000;
+}
+
+.Portones {
+    /*border: 2px solid #ff0000;*/
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.Portones_hijo {
+    width: 270px;
+    margin: 0 auto;
+}
+
+.Camaras {
+    /*border:2px blue solid;*/
+    width: 700px;
+    margin: 0 auto;
+}
+.Camaras_hijo {
+    width: 270px;
+    margin: 0 auto;
+}
+
+.Alarmas {
+    /*border: 2px green solid;*/
+    width: 300px;
+    margin: 0 auto;
+}
+.Alarma_hijo {
+    width: 270px;
+}

@@ -19,18 +19,13 @@
     <Property Name="Facebook" Type="nvarchar" MaxLength="50" />
     <Property Name="Instagram" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="DetalleProducto">
+  <EntityType Name="Especificaciones">
     <Key>
-      <PropertyRef Name="IdDetalleProducto" />
+      <PropertyRef Name="IdEspecificacion" />
     </Key>
-    <Property Name="IdDetalleProducto" Type="int" Nullable="false" />
-    <Property Name="IdProducto" Type="int" Nullable="false" />
-    <Property Name="PesoMaximo" Type="nvarchar" MaxLength="50" />
-    <Property Name="TiempoApertura" Type="nvarchar" MaxLength="50" />
-    <Property Name="Motor" Type="nvarchar" MaxLength="500" />
-    <Property Name="Reduccion" Type="nvarchar" MaxLength="50" />
-    <Property Name="Central" Type="nvarchar" MaxLength="50" />
-    <Property Name="Complemento" Type="nvarchar" MaxLength="500" />
+    <Property Name="IdEspecificacion" Type="int" Nullable="false" />
+    <Property Name="Texto" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Orden" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Imagenes">
     <Key>
@@ -41,16 +36,26 @@
     <Property Name="IdProducto" Type="int" Nullable="false" />
     <Property Name="Orden" Type="int" />
   </EntityType>
+  <EntityType Name="ProductoEspecificaciones">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+      <PropertyRef Name="IdEspecificacion" />
+    </Key>
+    <Property Name="IdProducto" Type="int" Nullable="false" />
+    <Property Name="IdEspecificacion" Type="int" Nullable="false" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
   <EntityType Name="Productos">
     <Key>
       <PropertyRef Name="IdProducto" />
     </Key>
     <Property Name="IdProducto" Type="int" Nullable="false" />
-    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="DescripcionBreve" Type="nvarchar" MaxLength="550" Nullable="false" />
     <Property Name="IdCategoria" Type="int" Nullable="false" />
-    <Property Name="Precio" Type="numeric" Precision="18" Scale="4" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="500" />
+    <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Activo" Type="bit" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -62,18 +67,6 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <Association Name="FK_DetalleProducto_Productos">
-    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-    <End Role="DetalleProducto" Type="Self.DetalleProducto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Productos">
-        <PropertyRef Name="IdProducto" />
-      </Principal>
-      <Dependent Role="DetalleProducto">
-        <PropertyRef Name="IdProducto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Imagenes_Productos">
     <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
     <End Role="Imagenes" Type="Self.Imagenes" Multiplicity="*" />
@@ -82,6 +75,30 @@
         <PropertyRef Name="IdProducto" />
       </Principal>
       <Dependent Role="Imagenes">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductoEspecificaciones_Especificaciones">
+    <End Role="Especificaciones" Type="Self.Especificaciones" Multiplicity="1" />
+    <End Role="ProductoEspecificaciones" Type="Self.ProductoEspecificaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Especificaciones">
+        <PropertyRef Name="IdEspecificacion" />
+      </Principal>
+      <Dependent Role="ProductoEspecificaciones">
+        <PropertyRef Name="IdEspecificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductoEspecificaciones_Producto">
+    <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+    <End Role="ProductoEspecificaciones" Type="Self.ProductoEspecificaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Productos">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="ProductoEspecificaciones">
         <PropertyRef Name="IdProducto" />
       </Dependent>
     </ReferentialConstraint>
@@ -132,17 +149,22 @@
   <EntityContainer Name="SEGModelStoreContainer">
     <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DATOS" EntityType="Self.DATOS" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DetalleProducto" EntityType="Self.DetalleProducto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Especificaciones" EntityType="Self.Especificaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Imagenes" EntityType="Self.Imagenes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductoEspecificaciones" EntityType="Self.ProductoEspecificaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_DetalleProducto_Productos" Association="Self.FK_DetalleProducto_Productos">
-      <End Role="Productos" EntitySet="Productos" />
-      <End Role="DetalleProducto" EntitySet="DetalleProducto" />
-    </AssociationSet>
     <AssociationSet Name="FK_Imagenes_Productos" Association="Self.FK_Imagenes_Productos">
       <End Role="Productos" EntitySet="Productos" />
       <End Role="Imagenes" EntitySet="Imagenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductoEspecificaciones_Especificaciones" Association="Self.FK_ProductoEspecificaciones_Especificaciones">
+      <End Role="Especificaciones" EntitySet="Especificaciones" />
+      <End Role="ProductoEspecificaciones" EntitySet="ProductoEspecificaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductoEspecificaciones_Producto" Association="Self.FK_ProductoEspecificaciones_Producto">
+      <End Role="Productos" EntitySet="Productos" />
+      <End Role="ProductoEspecificaciones" EntitySet="ProductoEspecificaciones" />
     </AssociationSet>
     <AssociationSet Name="FK_Productos_Categorias" Association="Self.FK_Productos_Categorias">
       <End Role="Categorias" EntitySet="Categorias" />

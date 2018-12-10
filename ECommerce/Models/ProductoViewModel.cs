@@ -14,6 +14,6 @@ namespace ECommerce.Models
         public string Nombre { get; set; }
         public string DescripcionBreve { get; set; }
         public string Categoria { get; set; }
-        public int Precio { get; set; }    
+        public double? Precio { get; set; }    
     }
 }

@@ -18,10 +18,16 @@ namespace ECommerce.Controllers
             var res = from p in Consultas.GetProducto(Id)
                       select new ProductoViewModel
                       {
-                          IdProducto = p.IdCategoria,
+                          IdProducto = p.IdProducto,
+                          IdCategoria = p.IdCategoria,
                           Nombre = p.Nombre,
                           DescripcionBreve = p.DescripcionBreve,
-                          
+                          Precio = (double?)p.Precio,
+                          IdImagen = (
+                                from i in p.Imagenes
+                                orderby i.Orden
+                                select i
+                            ).FirstOrDefault()?.IdImagen ?? 1,
                       };
             return View(viewName: "index", model: res.FirstOrDefault());
         }

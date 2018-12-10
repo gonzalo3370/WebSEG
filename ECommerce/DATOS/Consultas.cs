@@ -19,7 +19,7 @@ namespace ECommerce.DATOS
         {
             using (var context = new SEGEntities())
             {
-                var pro = (from p in context.Productos select p).ToList();
+                var pro = (from p in context.Productos.Include("Imagenes") select p).ToList();
                 return pro;
             }
         }
@@ -39,19 +39,21 @@ namespace ECommerce.DATOS
             using (var context = new SEGEntities())
             {
                 return (
-                    from c in context.Productos
+                    from c in context.Productos.Include("Imagenes")
                     where c.IdProducto == Id
                     select c
                     ).ToList();
             }
         }
+
         public IList<Producto> ProductosPorCategoria (int Id)
-        {
+        { 
             using (var context = new SEGEntities())
             {
                 return (
                     from p in context.Productos.Include("Imagenes")
                     where p.IdCategoria == Id
+                    where p.Activo == true
                     select p
                     ).ToList();
             }

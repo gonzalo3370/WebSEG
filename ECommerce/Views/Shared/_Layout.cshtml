@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿    <!DOCTYPE html>
 <!-- Navigation -->
 <html>
 <head>
@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("styles", required: false)
+
 </head>
 <body>
     @RenderBody()
@@ -27,12 +28,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                     </ul>
@@ -43,7 +38,10 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">SAN MIGUEL</p>
+            <div class="text-right">
+                <a href="#">  Empresa   </a>
+                <a href="#">  Contacto  </a>
+            </div>
         </div>
         <!-- /.container -->
     </footer>

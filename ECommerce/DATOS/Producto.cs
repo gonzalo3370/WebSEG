@@ -17,8 +17,8 @@ namespace ECommerce.DATOS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
-            this.DetalleProductoes = new HashSet<DetalleProducto>();
             this.Imagenes = new HashSet<Imagene>();
+            this.ProductoEspecificaciones = new HashSet<ProductoEspecificacione>();
         }
     
         public int IdProducto { get; set; }
@@ -27,11 +27,12 @@ namespace ECommerce.DATOS
         public int IdCategoria { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<bool> Activo { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleProducto> DetalleProductoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Imagene> Imagenes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductoEspecificacione> ProductoEspecificaciones { get; set; }
     }
 }

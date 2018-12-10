@@ -30,6 +30,7 @@ namespace ECommerce.Controllers
                                 orderby i.Orden
                                 select i
                             ).FirstOrDefault()?.IdImagen ?? 0,
+                           Precio = (double?)p.Precio
                        }).ToList();
             return View(viewName: "Index", model: res);
         }
@@ -45,24 +46,8 @@ namespace ECommerce.Controllers
                           Nombre = p.Nombre,
                           DescripcionBreve = p.DescripcionBreve
                       };
-            return View(viewName: "../Consultas/Search", model: res.FirstOrDefault());
+            return View(viewName: "Index", model: res);
 
-        }
-
-        /// <summary>
-        /// Obtiene los productos según el texto indicado
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Lista de productos</returns>
-        public ActionResult Texto(string texto)
-        {
-            var productos = from p in new Consultas().SearchProducto(texto)
-                            select new ProductoViewModel
-                            {
-                                Nombre = p.Nombre,
-                                IdImagen = p.Imagenes.FirstOrDefault().IdImagen
-                            };
-            return View(viewName: "Index", model: productos.ToList());
         }
     }
 }

@@ -2,7 +2,7 @@
 
 @section styles{
     <!-- Custom styles for this template -->
-    <link href="~/Content/shop-homepage.css" rel="stylesheet">
+    <link href="~/Content/StyleProducto.css" rel="stylesheet">
 }
 
 <!DOCTYPE html>
@@ -16,8 +16,19 @@
     <div class="jumbotron">
         <header class="container">
             <div>
-                El producto elegido es @Model.Nombre
+               @Model.Nombre
             </div>
+            <div>
+               <img src="/imagenes/imagen/@Model.IdImagen" height="200">
+            </div>
+            <p>
+                Caracteristicas: <br />
+                Descripcion: @Model.DescripcionBreve<br />
+                IdCategoria: @Model.IdCategoria<br />
+                IdProducto: @Model.IdProducto<br />
+                Precio: $@Model.Precio<br />
+                IdImagen: @Model.IdImagen<br />
+            </p>
         </header>
     </div>
 </body>

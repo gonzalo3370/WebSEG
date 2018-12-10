@@ -1,38 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SEGModelStoreContainer" CdmEntityContainer="SEGEntities">
-    <EntitySetMapping Name="Categorias">
-      <EntityTypeMapping TypeName="SEGModel.Categoria">
-        <MappingFragment StoreEntitySet="Categorias">
-          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DATOS">
-      <EntityTypeMapping TypeName="SEGModel.DATO">
-        <MappingFragment StoreEntitySet="DATOS">
-          <ScalarProperty Name="IdDato" ColumnName="IdDato" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
-          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="SEGModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SEGModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SEGModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SEGModel.Store.sp_dropdiagram" />
@@ -57,29 +25,42 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SEGModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SEGModel.Store.sp_upgraddiagrams" />
-    <EntitySetMapping Name="DetalleProductoes">
-      <EntityTypeMapping TypeName="SEGModel.DetalleProducto">
-        <MappingFragment StoreEntitySet="DetalleProducto">
-          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
-          <ScalarProperty Name="Central" ColumnName="Central" />
-          <ScalarProperty Name="Reduccion" ColumnName="Reduccion" />
-          <ScalarProperty Name="Motor" ColumnName="Motor" />
-          <ScalarProperty Name="TiempoApertura" ColumnName="TiempoApertura" />
-          <ScalarProperty Name="PesoMaximo" ColumnName="PesoMaximo" />
-          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-          <ScalarProperty Name="IdDetalleProducto" ColumnName="IdDetalleProducto" />
+    <EntitySetMapping Name="Especificaciones">
+      <EntityTypeMapping TypeName="SEGModel.Especificacione">
+        <MappingFragment StoreEntitySet="Especificaciones">
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Texto" ColumnName="Texto" />
+          <ScalarProperty Name="IdEspecificacion" ColumnName="IdEspecificacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Productos">
-      <EntityTypeMapping TypeName="SEGModel.Producto">
-        <MappingFragment StoreEntitySet="Productos">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Precio" ColumnName="Precio" />
-          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
-          <ScalarProperty Name="DescripcionBreve" ColumnName="DescripcionBreve" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+    <EntitySetMapping Name="ProductoEspecificaciones">
+      <EntityTypeMapping TypeName="SEGModel.ProductoEspecificacione">
+        <MappingFragment StoreEntitySet="ProductoEspecificaciones">
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="IdEspecificacion" ColumnName="IdEspecificacion" />
           <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="SEGModel.Categoria">
+        <MappingFragment StoreEntitySet="Categorias">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOS">
+      <EntityTypeMapping TypeName="SEGModel.DATO">
+        <MappingFragment StoreEntitySet="DATOS">
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdDato" ColumnName="IdDato" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -90,6 +71,30 @@
           <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SEGModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="SEGModel.Producto">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="DescripcionBreve" ColumnName="DescripcionBreve" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

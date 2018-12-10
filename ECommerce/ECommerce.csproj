@@ -159,12 +159,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ImagenesController.cs" />
     <Compile Include="Controllers\ListadoController.cs" />
-    <Compile Include="DATOS\Categoria.cs">
-      <DependentUpon>DataSEG.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\ConsultasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="DATOS\Categoria.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
     <Compile Include="DATOS\Consultas.cs" />
     <Compile Include="DATOS\DataSEG.Context.cs">
       <AutoGen>True</AutoGen>
@@ -184,28 +184,31 @@
     <Compile Include="DATOS\DATO.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
-    <Compile Include="DATOS\DetalleProducto.cs">
+    <Compile Include="DATOS\Especificacione.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATOS\Imagene.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATOS\Producto.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATOS\ProductoEspecificacione.cs">
+      <DependentUpon>DataSEG.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DATOS\sysdiagram.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="DATOS\Imagene.cs">
-      <DependentUpon>DataSEG.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CategoriaViewModel.cs" />
     <Compile Include="Models\ProductoViewModel.cs" />
-    <Compile Include="DATOS\Producto.cs">
-      <DependentUpon>DataSEG.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DATOS\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
     <Compile Include="DATOS\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataSEG.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DATOS\sysdiagram.cs">
       <DependentUpon>DataSEG.tt</DependentUpon>
     </Compile>
     <Compile Include="SQL\datos.cs" />
@@ -237,6 +240,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\menu_bg.png" />
     <Content Include="Content\images\search_btn.png" />
+    <Content Include="Content\images\StyleProducto.css" />
     <Content Include="Content\images\Xbox360.jpg" />
     <Content Include="Content\images\xbox360Halo3EditionConsole.jpg" />
     <Content Include="Content\images\xbox360HardDrive.jpg" />
@@ -246,7 +250,9 @@
     <Content Include="Content\images\xbox360MessengerKit.jpg" />
     <Content Include="Content\images\Xbox360WheelController.jpg" />
     <Content Include="Content\images\Xbox360WirelessController.jpg" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\shop-homepage.css" />
+    <Content Include="Content\StyleProducto.css" />
     <Content Include="DATOS\DataSEG.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DataSEG.Context.cs</LastGenOutput>
@@ -333,12 +339,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Consultas\Categorias.cshtml" />
     <Content Include="Views\Listado\Index.cshtml" />
-    <Content Include="Views\Consultas\Productos.cshtml" />
-    <Content Include="Views\Consultas\Categoria.cshtml" />
-    <Content Include="Views\Consultas\Producto.cshtml" />
-    <Content Include="Views\Consultas\Search.cshtml" />
     <Content Include="Views\Listado\IndexCopy.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
   </ItemGroup>
